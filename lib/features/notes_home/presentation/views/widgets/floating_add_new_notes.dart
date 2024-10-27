@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:notes_app/core/theme/constants/colors.dart';
 import 'package:notes_app/features/create_note/presentation/views/create_note_view.dart';
 
 class FloatingAddNewNotes extends StatelessWidget {
@@ -11,7 +12,7 @@ class FloatingAddNewNotes extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xff6B4EFF),
+          backgroundColor: NoteColors.primaryColor,
           padding: const EdgeInsets.all(16)
       ),
       onPressed: (){
