@@ -23,7 +23,7 @@ class FloatingAddNewNotes extends StatelessWidget {
         children: [
           Icon(Icons.add,color: Colors.white,size: 26,),
           SizedBox(width: 8,),
-          Text("Add New Notes",style: TextStyle(color: Colors.white),),
+          Text("Add New Note",style: TextStyle(color: Colors.white),),
         ],
       ),
     );
