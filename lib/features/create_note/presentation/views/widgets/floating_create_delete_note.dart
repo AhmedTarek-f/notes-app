@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:notes_app/features/create_note/presentation/views/create_note_view.dart';
+import 'package:notes_app/core/theme/constants/colors.dart';
+import 'package:notes_app/features/create_note/presentation/views_model/create_note_controller.dart';
 
 class FloatingCreateDeleteNote extends StatelessWidget {
   const FloatingCreateDeleteNote({
@@ -9,6 +10,7 @@ class FloatingCreateDeleteNote extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final CreateNoteController controller = CreateNoteController.instance;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24.0),
       child: Row(
@@ -20,17 +22,17 @@ class FloatingCreateDeleteNote extends StatelessWidget {
                 padding: const EdgeInsets.all(16)
             ),
             onPressed: (){
-              Get.to(() => const CreateNoteView());
+              Get.back();
             },
             child: const Text("Cancel",style: TextStyle(color: Colors.white),),
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xff6B4EFF),
+                backgroundColor: NoteColors.primaryColor,
                 padding: const EdgeInsets.all(16)
             ),
-            onPressed: (){
-              Get.to(() => const CreateNoteView());
+            onPressed: () async{
+              await controller.createNote();
             },
             child: const Text("Create",style: TextStyle(color: Colors.white),),
           ),
