@@ -23,7 +23,7 @@ abstract class Loaders {
     );
   }
 
-  static successSnackBar ({required title, message ="",int secondsDuration = 3})
+  static successSnackBar ({required title, message ="",int secondsDuration = 1})
   {
     Get.snackbar(
       title,
