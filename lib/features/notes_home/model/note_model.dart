@@ -1,12 +1,18 @@
+import 'package:flutter/material.dart';
+
 class NoteModel {
    NoteModel({
     required this.noteTitle,
     required this.noteBody,
-    required this.date
+    required this.date,
+     required this.lightNoteBackgroundColor,
+     required this.darkNoteBackgroundColor,
   });
   String noteTitle;
   String? noteBody;
   final String date;
+  Color lightNoteBackgroundColor;
+  Color darkNoteBackgroundColor;
 
   // Convert NoteModel to Map
   Map<String, dynamic> toJson() {
@@ -14,6 +20,8 @@ class NoteModel {
       'noteTitle': noteTitle,
       'noteBody': noteBody,
       'date': date,
+      'lightNoteBackgroundColor': lightNoteBackgroundColor.value,
+      'darkNoteBackgroundColor': darkNoteBackgroundColor.value,
     };
   }
 
@@ -23,6 +31,8 @@ class NoteModel {
       noteTitle: json['noteTitle'],
       noteBody: json['noteBody'],
       date: json['date'],
+      lightNoteBackgroundColor: Color(json['lightNoteBackgroundColor']),
+      darkNoteBackgroundColor: Color(json['darkNoteBackgroundColor']),
     );
   }
 }
