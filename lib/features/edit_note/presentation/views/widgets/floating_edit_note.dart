@@ -12,15 +12,25 @@ class FloatingEditNote extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final EditNoteController controller = EditNoteController.instance;
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-          backgroundColor: NoteColors.primaryColor,
-          padding: const EdgeInsets.all(16)
-      ),
-      onPressed: () async{
-        await controller.editNote();
-      },
-      child: const Text("Edit note",style: TextStyle(color: Colors.white),),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        IconButton(onPressed: (){controller.changeNoteColor(context);}, icon: const Icon(Icons.color_lens_outlined)),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+                backgroundColor: NoteColors.primaryColor,
+                padding: const EdgeInsets.all(16)
+            ),
+            onPressed: () async{
+              await controller.editNote();
+            },
+            child: const Text("Edit note",style: TextStyle(color: Colors.white),),
+          ),
+        ),
+        IconButton(onPressed: (){}, icon: const Icon(Icons.image_outlined)),
+      ],
     );
   }
 }
