@@ -20,7 +20,8 @@ class NoteRepository extends GetxController {
   List<NoteModel> getNotes() {
     List<dynamic>? jsonNotes = _storage.read<List<dynamic>>('notes');
     if (jsonNotes != null) {
-      return jsonNotes.map((json) => NoteModel.fromJson(Map<String, dynamic>.from(json))).toList();
+      final List<NoteModel> notesList = jsonNotes.map((json) => NoteModel.fromJson(Map<String, dynamic>.from(json))).toList();
+      return notesList;
     }
     else{
       return [];
@@ -28,19 +29,9 @@ class NoteRepository extends GetxController {
   }
 
   Future<void> addNote(NoteModel note) async{
-    // Retrieve the current list of notes from GetStorage
-    List<dynamic>? jsonNotes = _storage.read<List<dynamic>>('notes');
-
-    // Convert to List<NoteModel> if it exists, or initialize an empty list
-    List<NoteModel> notes = jsonNotes != null
-        ? jsonNotes.map((json) => NoteModel.fromJson(Map<String, dynamic>.from(json))).toList()
-        : [];
-
-    // Add the new note to the list
+    List<NoteModel> notes = getNotes();
     notes.add(note);
-
-    // Save the updated list back to GetStorage
-   await saveNotes(notes);
+    await saveNotes(notes);
   }
 
   Future<void> deleteNote(NoteModel note) async {
@@ -53,6 +44,22 @@ class NoteRepository extends GetxController {
       // Find the index of the note to delete
       notesList.removeWhere((targetedNote) => targetedNote["noteTitle"] == note.noteTitle && targetedNote["date"] == note.date && targetedNote["noteBody"] == note.noteBody);
 
+      // Save the updated list back to GetStorage
+      await _storage.write("notes", notesList);
+    }
+  }
+
+  Future<void> editNote({required NoteModel oldNote,required NoteModel editedNote}) async {
+    List<dynamic>? jsonNotes = _storage.read<List<dynamic>>("notes");
+
+    if (jsonNotes != null) {
+      // Convert jsonNotes to List<Map<String, dynamic>>
+      List<Map<String, dynamic>> notesList = jsonNotes.map((e) => Map<String, dynamic>.from(e)).toList();
+
+      // Find the note to edit
+       Map<String,dynamic> editableNote = notesList.firstWhere((targetedNote) => targetedNote["noteTitle"] == oldNote.noteTitle && targetedNote["date"] == oldNote.date && targetedNote["noteBody"] == oldNote.noteBody);
+       editableNote["noteTitle"] = editedNote.noteTitle;
+       editableNote["noteBody"] = editedNote.noteBody;
       // Save the updated list back to GetStorage
       await _storage.write("notes", notesList);
     }
