@@ -7,8 +7,7 @@ import 'package:notes_app/features/notes_home/model/note_model.dart';
 import 'package:notes_app/features/notes_home/presentation/views_model/notes_home_controller.dart';
 
 class NoteItem extends StatelessWidget {
-  const NoteItem({super.key, this.noteBackgroundColor, required this.note});
-  final Color? noteBackgroundColor;
+  const NoteItem({super.key,required this.note});
   final NoteModel note;
   @override
   Widget build(BuildContext context) {
@@ -24,7 +23,7 @@ class NoteItem extends StatelessWidget {
         width: MediaQuery.sizeOf(context).width,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
-          color: noteBackgroundColor ?? (isDarkMode? Colors.grey[850]: Colors.black12),
+          color: isDarkMode? note.darkNoteBackgroundColor:note.lightNoteBackgroundColor,
         ),
         child: Stack(
           children: [
@@ -86,7 +85,7 @@ class NoteItem extends StatelessWidget {
      ),
       cancel: ElevatedButton(
         style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.green.withOpacity(0.7),
+            backgroundColor: isDarkMode? Colors.grey[800] :Colors.black26,
             padding: const EdgeInsets.all(8)
         ),
         onPressed: ()async{
