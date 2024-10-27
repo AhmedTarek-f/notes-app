@@ -5,11 +5,12 @@ import 'package:get_storage/get_storage.dart';
 import 'package:notes_app/core/theme/note_app_theme.dart';
 import 'package:notes_app/features/notes_home/presentation/views/notes_home_view.dart';
 
-void main()  {
-  // final WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  // await GetStorage.init();
-  //
-  // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+Future<void> main() async{
+
+  final WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  await GetStorage.init();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+
   runApp(const NotesApp());
 }
 

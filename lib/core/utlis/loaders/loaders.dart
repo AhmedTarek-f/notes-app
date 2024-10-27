@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:notes_app/core/theme/constants/colors.dart';
 
 abstract class Loaders {
 
@@ -30,7 +31,7 @@ abstract class Loaders {
       isDismissible: true,
       shouldIconPulse: true,
       colorText: Colors.white,
-      backgroundColor: const Color(0xff6B4EFF),
+      backgroundColor: NoteColors.primaryColor,
       snackPosition: SnackPosition.BOTTOM,
       duration:  Duration(seconds: secondsDuration),
       margin:  const EdgeInsets.all(20),
