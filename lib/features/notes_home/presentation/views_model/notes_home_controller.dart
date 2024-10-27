@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:notes_app/data/repositories/note_repository.dart';
@@ -6,11 +7,16 @@ import 'package:notes_app/features/notes_home/model/note_model.dart';
 class NotesHomeController extends GetxController {
   static NotesHomeController get instance => Get.find();
   final NoteRepository _noteRepository = Get.put(NoteRepository());
+  late final TextEditingController searchFieldController;
   RxList<NoteModel> notesList = <NoteModel>[].obs;
+  RxList<NoteModel> notesSearchList = <NoteModel>[].obs;
+  RxBool isSearchSelected = false.obs;
+
 
   @override
   void onInit() {
     initNotesList();
+    searchFieldController = TextEditingController();
     FlutterNativeSplash.remove();
     super.onInit();
   }
@@ -26,5 +32,24 @@ class NotesHomeController extends GetxController {
     notesList.clear();
     notesList.assignAll(allNotes);
     Get.back();
+  }
+
+  void noteSearch({required String noteTitle}) {
+    if(notesList.isNotEmpty){
+      notesSearchList.clear();
+      List<NoteModel> notesSearch = notesList.where((note)=> note.noteTitle.toLowerCase().contains(noteTitle.toLowerCase())).toList();
+      notesSearchList.assignAll(notesSearch);
+    }
+  }
+
+  void clearSearchField(){
+    searchFieldController.clear();
+    notesSearchList.clear();
+  }
+
+  @override
+  void onClose() {
+    searchFieldController.dispose();
+    super.onClose();
   }
 }
