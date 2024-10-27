@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:notes_app/core/theme/constants/app_styles.dart';
 import 'package:notes_app/features/create_note/presentation/views/widgets/create_note_view_body.dart';
-import 'package:notes_app/features/create_note/presentation/views/widgets/floating_create_delete_note.dart';
+import 'package:notes_app/features/create_note/presentation/views/widgets/floating_create_note.dart';
 
 class CreateNoteView extends StatelessWidget {
   const CreateNoteView({super.key});
@@ -9,10 +9,9 @@ class CreateNoteView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: const FloatingCreateDeleteNote(),
+      floatingActionButton: const FloatingCreateNote(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       appBar: AppBar(
-        automaticallyImplyLeading: false,
         surfaceTintColor: Colors.transparent,
         title: Text("Create Note",style: AppStyles.stylesSemiBold24,),
       ),

@@ -10,7 +10,7 @@ class NotesHomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return  const Scaffold(
       floatingActionButton: FloatingAddNewNotes(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       appBar: NotesHomeAppBar(),
       body:  NotesHomeViewBody(),
     );
