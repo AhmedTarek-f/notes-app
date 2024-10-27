@@ -60,6 +60,8 @@ class NoteRepository extends GetxController {
        Map<String,dynamic> editableNote = notesList.firstWhere((targetedNote) => targetedNote["noteTitle"] == oldNote.noteTitle && targetedNote["date"] == oldNote.date && targetedNote["noteBody"] == oldNote.noteBody);
        editableNote["noteTitle"] = editedNote.noteTitle;
        editableNote["noteBody"] = editedNote.noteBody;
+       editableNote["lightNoteBackgroundColor"] = editedNote.lightNoteBackgroundColor.value;
+       editableNote["darkNoteBackgroundColor"] = editedNote.darkNoteBackgroundColor.value;
       // Save the updated list back to GetStorage
       await _storage.write("notes", notesList);
     }
