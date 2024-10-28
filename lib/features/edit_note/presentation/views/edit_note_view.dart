@@ -10,7 +10,7 @@ class EditNoteView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: const FloatingEditNote(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterFloat,
       appBar: AppBar(
         surfaceTintColor: Colors.transparent,
         title: Text("Edit Note",style: AppStyles.stylesSemiBold24,),

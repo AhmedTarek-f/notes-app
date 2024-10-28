@@ -17,7 +17,7 @@ class NotesHomeViewBody extends StatelessWidget {
         (){
           if(controller.notesList.isNotEmpty){
             return Padding(
-              padding: EdgeInsets.only(right:16 , left: 16, bottom: MediaQuery.sizeOf(context).height*0.09),
+              padding: EdgeInsets.symmetric(horizontal: 16),
               child: Obx(
                 ()=> Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

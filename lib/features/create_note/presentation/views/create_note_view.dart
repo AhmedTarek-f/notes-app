@@ -10,7 +10,7 @@ class CreateNoteView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: const FloatingCreateNote(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterFloat,
       appBar: AppBar(
         surfaceTintColor: Colors.transparent,
         title: Text("Create Note",style: AppStyles.stylesSemiBold24,),

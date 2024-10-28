@@ -15,7 +15,7 @@ class CreateNoteForm extends StatelessWidget {
     return Obx(
       ()=> Expanded(
         child: Padding(
-          padding: EdgeInsets.only(bottom:MediaQuery.sizeOf(context).height*0.1),
+          padding: EdgeInsets.only(bottom:MediaQuery.sizeOf(context).height*0.073),
           child: Form(
             key: controller.createNoteFormKey,
             autovalidateMode: controller.autoValidateMode.value,

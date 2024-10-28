@@ -1,13 +1,13 @@
 flutter_native_splash:
-  color: "#FFFFFF"
-  color_dark: "#272727"
-  image: assets/logos/note_logo.png
-  image_dark: assets/logos/note_logo.png
+  color: "#C9E8EA"
+  color_dark: "#000000"
+  image: assets/logos/light_logo.jpeg
+  image_dark: assets/logos/dark_logo.png
 
   android_12:
-    color: "#FFFFFF"
-    color_dark: "#272727"
-    image: assets/logos/note_logo.png
-    image_dark: assets/logos/note_logo.png
+    color: "#C9E8EA"
+    color_dark: "#000000"
+    image: assets/logos/light_logo.jpeg
+    image_dark: assets/logos/dark_logo.png
 
   web: false
