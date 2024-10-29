@@ -42,7 +42,7 @@ class NoteRepository extends GetxController {
       List<Map<String, dynamic>> notesList = jsonNotes.map((e) => Map<String, dynamic>.from(e)).toList();
 
       // Find the index of the note to delete
-      notesList.removeWhere((targetedNote) => targetedNote["noteTitle"] == note.noteTitle && targetedNote["date"] == note.date && targetedNote["noteBody"] == note.noteBody);
+      notesList.removeWhere((targetedNote) => targetedNote["noteTitle"] == note.noteTitle && targetedNote["date"] == note.date && targetedNote["noteContents"][0]["text"] == note.noteContents[0].text);
 
       // Save the updated list back to GetStorage
       await _storage.write("notes", notesList);
@@ -57,9 +57,9 @@ class NoteRepository extends GetxController {
       List<Map<String, dynamic>> notesList = jsonNotes.map((e) => Map<String, dynamic>.from(e)).toList();
 
       // Find the note to edit
-       Map<String,dynamic> editableNote = notesList.firstWhere((targetedNote) => targetedNote["noteTitle"] == oldNote.noteTitle && targetedNote["date"] == oldNote.date && targetedNote["noteBody"] == oldNote.noteBody);
+       Map<String,dynamic> editableNote = notesList.firstWhere((targetedNote) => targetedNote["noteTitle"] == oldNote.noteTitle && targetedNote["date"] == oldNote.date);
        editableNote["noteTitle"] = editedNote.noteTitle;
-       editableNote["noteBody"] = editedNote.noteBody;
+       editableNote["noteContents"] = editedNote.noteContents;
        editableNote["lightNoteBackgroundColor"] = editedNote.lightNoteBackgroundColor.value;
        editableNote["darkNoteBackgroundColor"] = editedNote.darkNoteBackgroundColor.value;
       // Save the updated list back to GetStorage

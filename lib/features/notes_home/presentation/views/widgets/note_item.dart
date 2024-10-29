@@ -34,7 +34,7 @@ class NoteItem extends StatelessWidget {
                 const SizedBox(height: 16,),
                 Padding(
                   padding: const EdgeInsets.only(right: 60),
-                  child: Text((note.noteBody?.isEmpty??true)|| (note.noteBody?.trim() == "")? "Empty content..." : note.noteBody!, style: AppStyles.stylesRegular16,maxLines: 4,),
+                  child: note.noteContents.isEmpty ? Text("Empty content...",style:AppStyles.stylesRegular16 ,): controller.displayNoteTextContent(noteContents: note.noteContents),
                 ),
                 const SizedBox(height: 32,),
               ],

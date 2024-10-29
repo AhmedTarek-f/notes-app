@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
+import 'package:notes_app/core/theme/constants/app_styles.dart';
 import 'package:notes_app/data/repositories/note_repository.dart';
+import 'package:notes_app/features/notes_home/model/note_content.dart';
 import 'package:notes_app/features/notes_home/model/note_model.dart';
 
 class NotesHomeController extends GetxController {
@@ -32,6 +34,16 @@ class NotesHomeController extends GetxController {
     notesList.clear();
     notesList.assignAll(allNotes);
     Get.back();
+  }
+
+  Text displayNoteTextContent({required List<NoteContent> noteContents}) {
+    String noteContent = "";
+    for(var item in noteContents){
+      if(item.text != null && (item.text?.isNotEmpty?? false)){
+        noteContent += "${item.text} ";
+      }
+    }
+    return Text(noteContent,style: AppStyles.stylesRegular16,maxLines: 4,);
   }
 
   void noteSearch({required String noteTitle}) {
