@@ -27,7 +27,12 @@ class FloatingCreateNote extends StatelessWidget {
             child: const Text("Create note",style: TextStyle(color: Colors.white),),
           ),
         ),
-        IconButton(onPressed: (){}, icon: const Icon(Icons.image_outlined)),
+        IconButton(
+          onPressed: ()async {
+            await controller.openImagePicker(context);
+          },
+          icon: const Icon(Icons.image_outlined),
+        ),
       ],
     );
   }

@@ -1,14 +1,15 @@
-import 'dart:developer';
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:notes_app/core/theme/constants/app_styles.dart';
 import 'package:notes_app/core/theme/constants/colors.dart';
+import 'package:notes_app/core/utlis/common_widgets/rounded_container_image.dart';
+import 'package:notes_app/core/utlis/images/notes_images.dart';
 import 'package:notes_app/core/utlis/loaders/loaders.dart';
 import 'package:notes_app/data/repositories/note_repository.dart';
+import 'package:notes_app/features/notes_home/model/note_content.dart';
 import 'package:notes_app/features/notes_home/model/note_model.dart';
 import 'package:notes_app/features/notes_home/presentation/views_model/notes_home_controller.dart';
 
@@ -18,18 +19,25 @@ class CreateNoteController extends GetxController
   final NotesHomeController notesHomeController =  NotesHomeController.instance;
   final NoteRepository _noteRepository = NoteRepository.instance;
   late final TextEditingController title;
-  late final TextEditingController content;
   final String date = DateFormat('MMMM d \'at\' h:mm a').format(DateTime.now()).toString();
-  GlobalKey<FormState> createNoteFormKey = GlobalKey<FormState>();
-  Rx<AutovalidateMode> autoValidateMode = AutovalidateMode.disabled.obs;
-  Rx<Color> lightPickerColor = const Color(0x1F000000).obs;
-  Rx<Color> darkPickerColor = const Color(0xFF212121).obs;
+  final GlobalKey<FormState> createNoteFormKey = GlobalKey<FormState>();
+  final Rx<AutovalidateMode> autoValidateMode = AutovalidateMode.disabled.obs;
+  final Rx<Color> lightPickerColor = const Color(0x1F000000).obs;
+  final Rx<Color> darkPickerColor = const Color(0xFF212121).obs;
+  final RxList<NoteContent> noteContents = <NoteContent>[].obs;
+  final RxBool isPickingImageLoading = false.obs;
+
   @override
   void onInit() {
     title = TextEditingController();
-    content = TextEditingController();
+    addInitialTextField();
     super.onInit();
   }
+
+  void addInitialTextField() {
+    noteContents.add(NoteContent(text: ''));
+  }
+
   void applyAutoValidateMode()
   {
     autoValidateMode.value = AutovalidateMode.always;
@@ -43,13 +51,13 @@ class CreateNoteController extends GetxController
       if(createNoteFormKey.currentState!.validate()) {
         final NoteModel note = NoteModel(
             noteTitle: title.text,
-            noteBody: content.text,
+            noteContents: noteContents,
             date: date,
           darkNoteBackgroundColor: darkPickerColor.value,
           lightNoteBackgroundColor: lightPickerColor.value,
         );
-        notesHomeController.notesList.add(note);
         await _noteRepository.addNote(note);
+        notesHomeController.notesList.add(note);
         disableAutoValidateMode();
         Loaders.successSnackBar(title: "Note creation",message: "Note has been created successfully.");
         Navigator.pop(Get.overlayContext!);
@@ -92,10 +100,57 @@ class CreateNoteController extends GetxController
     );
   }
 
+  Future<void> openImagePicker(BuildContext context) async {
+    final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    await Get.bottomSheet(
+      Padding(
+        padding: EdgeInsets.symmetric(vertical: MediaQuery.sizeOf(context).height*0.05),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            RoundedContainerImage(
+              image: NotesImages.galleryIcon,
+              onTap: ()async{
+                final ImagePicker picker = ImagePicker();
+                isPickingImageLoading.value = true;
+                final XFile? pickedFile = await picker.pickImage(source: ImageSource.gallery);
+                isPickingImageLoading.value = false;
+                if (pickedFile != null) {
+                  noteContents.add(NoteContent(imagePath: pickedFile.path));
+                  noteContents.add(NoteContent(text: ''));
+                  Get.back();
+                }
+              },
+            ),
+            RoundedContainerImage(
+              image: NotesImages.cameraIcon,
+              onTap: () async{
+                final ImagePicker picker = ImagePicker();
+                isPickingImageLoading.value = true;
+                final XFile? pickedFile = await picker.pickImage(source: ImageSource.camera);
+                isPickingImageLoading.value = false;
+                if (pickedFile != null) {
+                  noteContents.add(NoteContent(imagePath: pickedFile.path));
+                  noteContents.add(NoteContent(text: ''));
+                  Get.back();
+                }
+              },
+            ),
+          ],
+        ),
+      ),
+      backgroundColor: isDarkMode? Colors.grey[800]!: Colors.black,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16),),
+      isDismissible: !isPickingImageLoading.value,
+    );
+
+  }
+
+
   @override
   void onClose() {
     title.dispose();
-    content.dispose();
     super.onClose();
   }
 }
+
