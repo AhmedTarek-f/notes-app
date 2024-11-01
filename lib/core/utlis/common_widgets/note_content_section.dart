@@ -37,6 +37,9 @@ class NoteContentSection extends StatelessWidget {
                       ),
                       maxLines: null,
                       expands: true,
+                      onSaved: (value){
+                        item.text = value;
+                      },
                     ),
                   ),
                 );
@@ -48,6 +51,9 @@ class NoteContentSection extends StatelessWidget {
                     initialValue: item.text,
                     onChanged: (value) => item.text = value,
                     maxLines: null,
+                    onSaved: (value){
+                      item.text=value;
+                    },
                   ),
                 );
               }
@@ -59,6 +65,9 @@ class NoteContentSection extends StatelessWidget {
                   initialValue: item.text,
                   onChanged: (value) => item.text = value,
                   maxLines: null,
+                  onSaved: (value){
+                    item.text=value;
+                  },
                 ),
               );
             } else if (item.imagePath != null) {

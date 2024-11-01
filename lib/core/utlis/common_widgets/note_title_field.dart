@@ -24,6 +24,9 @@ class NoteTitleField extends StatelessWidget {
         }
         return null;
       },
+      onSaved: (value){
+        title.text=value ?? "";
+      },
     );
   }
 }

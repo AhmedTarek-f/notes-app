@@ -49,6 +49,7 @@ class CreateNoteController extends GetxController
   Future<void> createNote() async{
     try{
       if(createNoteFormKey.currentState!.validate()) {
+        createNoteFormKey.currentState!.save();
         final NoteModel note = NoteModel(
             noteTitle: title.text,
             noteContents: noteContents,
