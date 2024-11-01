@@ -29,7 +29,7 @@ class NoteModel {
   factory NoteModel.fromJson(Map<String, dynamic> json) {
     return NoteModel(
       noteTitle: json['noteTitle'],
-      noteContents: (json['noteContents'] as List).map((contentJson) => NoteContent.fromJson(Map<String,dynamic>.from(contentJson))).toList(),
+      noteContents: (json['noteContents'] as List<dynamic>).map((contentJson) => NoteContent.fromJson(Map<String,dynamic>.from(contentJson))).toList(),
       date: json['date'],
       lightNoteBackgroundColor: Color(json['lightNoteBackgroundColor']),
       darkNoteBackgroundColor: Color(json['darkNoteBackgroundColor']),
