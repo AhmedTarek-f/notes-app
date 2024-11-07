@@ -20,9 +20,9 @@ A feature-rich note-taking application built with Flutter. My Notes app allows u
 
 
 ## Screenshots 📸
-![WhatsApp Image 2024-11-06 at 21 09 26_59640289](https://github.com/user-attachments/assets/87f35aac-d529-4daa-b624-768f5997f910)
-![WhatsApp Image 2024-11-06 at 21 09 27_615d56c5](https://github.com/user-attachments/assets/563f267d-fcd4-46e5-89d2-284f725a3fdc)
-![WhatsApp Image 2024-11-06 at 21 09 27_c1b20d53](https://github.com/user-attachments/assets/a4c575c1-b227-4d78-8a84-ef479a4e652b)
+<img src="https://github.com/user-attachments/assets/87f35aac-d529-4daa-b624-768f5997f910" alt="Screenshot 1" width="300"/>
+<img src="https://github.com/user-attachments/assets/563f267d-fcd4-46e5-89d2-284f725a3fdc" alt="Screenshot 2" width="300"/>
+<img src="https://github.com/user-attachments/assets/a4c575c1-b227-4d78-8a84-ef479a4e652b" alt="Screenshot 3" width="300"/>
 
 ## Download 📥
 
