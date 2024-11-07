@@ -26,7 +26,7 @@ A feature-rich note-taking application built with Flutter. My Notes app allows u
 
 ## Download 📥
 
-Get the T Store app on your device:
+Get the My Notes app on your device:
 
 - [Download for Android](https://drive.google.com/file/d/1Vd3ME4YXKo6gIj5Xy2U9b01UcJz1aDH8/view?usp=drive_link)
 
